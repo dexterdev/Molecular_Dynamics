@@ -4,7 +4,7 @@
 #PBS -N POLY_ALA_salt
 #PBS -q workq
 #PBS -V
-#PBS -M devanandt@imsc.res.in
+#PBS -M devanand.t.1986@gmail.com
 #PBS -m abe 
 #PBS -j oe
 
@@ -24,8 +24,5 @@ rm -rf tmp.nodes
 export  MPI_DSM_DISTRIBUTE=1
 NODEFILE=PBS_NODEFILE_$PBS_JOBID
 
-#MPI Case
-#module load intel/2015
-#module load namd/2.10
 
-mpirun -v -f $NODEFILE /opt/app/namd/2.9/namd2 /lustre/devanandt/NAMD/PEPTIDE_EXPERIMENTS/POLY_ALA12_NaCl_ions/poly-ala.config  >& out_$PBS_JOBID.out
+mpirun -v -f $NODEFILE namd2 poly-ala.config  >& out_$PBS_JOBID.out
