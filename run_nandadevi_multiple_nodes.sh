@@ -27,3 +27,6 @@ module load intel/2015
 module load namd/2.10
 
 mpirun -v -np $NP /opt/apps/namd/2.10/namd2 *config  >& out
+
+#Info: Benchmark time: 256 CPUs 0.00351786 s/step 0.020358 days/ns 400.758 MB memory  (nandaq) 16 node * 16 core .. 
+#used NAMD 2.10 from nandadevi machine installed by admins
