@@ -8,7 +8,7 @@
 
 #SBATCH --export=all
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=devanand.t.1986@gmail.com
+#SBATCH --mail-user=devanandt@imsc.res.in
 
 
 cd $SLURM_SUBMIT_DIR
