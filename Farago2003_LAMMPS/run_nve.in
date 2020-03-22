@@ -1,0 +1,60 @@
+# -------- REQUIREMENTS: ---------
+# 1) This example may require additional features and bug fixes for LAMMPS.
+#   Be sure to download and copy the "additional_lammps_code" from 
+#   http://moltemplate.org     (upper-left corner menu)
+# 2) Unpack it
+# 3) copy the .cpp and .h files to the src folding of your lammps installation.
+# 4) Compile LAMMPS.
+#
+# (If LAMMPS complains about an "Invalid pair_style"
+#  then you made a mistake in the instructions above.)
+#
+
+# -- Init Section --
+
+include system.in.init
+
+# -- Atom Definition Section --
+
+read_data system_after_min.data
+
+# -- Settings Section --
+
+include system.in.settings
+
+# -- Run Section --
+
+
+timestep      0.005
+dump          1 all custom 500 traj_nve.lammpstrj id mol type x y z ix iy iz
+
+
+thermo_style  custom step temp pe etotal vol epair ebond eangle
+thermo        10  # time interval for printing out "thermo" data
+
+velocity all create 1 12345
+fix 1 all restrain bond 1 2 3000.0 3000.0 1.0
+fix 2 all restrain angle 1 2 3 3000.0 3000.0 180.0
+#group LIPID id 1:6144
+#fix 1 all setforce 0 0 0
+fix	3 all nve
+
+# Note: The temperature is 1.1*ε
+#       (ε = "epsilon" used by the coarse-grained lipid)
+# Note: The langevin damping parameter is now "50.0" in units of time
+#       (which are (m/(ε*σ^2))^(1/2) because we are using "units lj"
+#        This is grossly underdamped compared to the real system, 
+#        but it leads to more efficient sampling.)
+# Note: We maintain the system system at constant (zero) tention 
+#       using a barostat damping parameter Pdamp=1000 ("0 0 1000")
+
+
+
+# optional (not sure if this helps):
+# balance x uniform y uniform
+
+
+run           100000
+
+write_data system_after_nve.data
+
