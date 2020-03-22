@@ -1,0 +1,36 @@
+# -- Init section --
+
+include system.in.init
+
+# -- Atom definition section --
+
+read_data system.data
+
+# -- Settings Section --
+
+include system.in.settings
+
+# -- Run section --
+
+dump            1 all custom 500 traj_min.lammpstrj id mol type x y z ix iy iz
+thermo_style    custom step pe etotal vol epair ebond eangle
+thermo          20  # time interval for printing out "thermo" data
+
+#min_style quickmin
+#min_modify dmax 0.03
+#min_style hftn
+#min_modify dmax 0.05
+##minimize 1.0e-4 1.0e-6 100 1000
+
+group LIPID id 1:6144
+#all atoms
+#fix 1 LIPID freeze
+#fix 1 LIPID setforce 0 0 0
+
+
+neigh_modify every 1 delay 0 check yes
+min_style cg
+minimize 1.0e-7 1.0e-9 100000 300000
+#minimize 0.0 0.0 10000 1000000
+
+write_data  system_after_min.data
