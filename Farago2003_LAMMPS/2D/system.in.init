@@ -1,0 +1,13 @@
+    dimension 2
+    boundary        p p p
+    units           lj
+    atom_style      full
+
+    bond_style      harmonic
+    angle_style     harmonic
+    pair_style      table linear 500
+#    pair_modify     shift yes    
+    special_bonds lj 0.0 0.0 0.0
+
+    neigh_modify    every 1 delay 1
+    neighbor        0.3 bin

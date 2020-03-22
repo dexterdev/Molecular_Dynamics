@@ -1,0 +1,9 @@
+    pair_coeff  1 1 farago2003_tabulated_potential_Mar18.dat HEAD_HEAD
+    pair_coeff  2 2 farago2003_tabulated_potential_Mar18.dat TAIL1_TAIL1
+    pair_coeff  3 3 farago2003_tabulated_potential_Mar18.dat TAIL2_TAIL2
+    pair_coeff  2 3 farago2003_tabulated_potential_Mar18.dat TAIL1_TAIL2
+    pair_coeff  1 2 farago2003_tabulated_potential_Mar18.dat HEAD_TAIL1
+    pair_coeff  1 3 farago2003_tabulated_potential_Mar18.dat HEAD_TAIL2
+    bond_coeff  1   3000.0 1.0
+    bond_coeff  2   3000.0 1.0 
+    angle_coeff 1  3000.0 180.0
