@@ -1,0 +1,30 @@
+# -- Init Section --
+
+include system.in.init
+
+# -- Atom Definition Section --
+
+read_data 2p_mol_after_min.data
+
+# -- Settings Section --
+
+include system.in.settings
+
+# -- Run Section --
+
+
+timestep      0.01
+dump          1 all custom 10 2p_mol_nvt_.lammpstrj id mol type x y z ix iy iz
+
+
+thermo_style  custom step temp pe etotal vol epair ebond eangle
+thermo        100  # time interval for printing out "thermo" data
+
+fix 1 all langevin 0.9 0.9 1.2 48279
+fix 2 all nve
+#velocity all zero linear mom yes
+
+#run           1000000
+run           100000
+write_data 2p_mol_nvt_.data
+

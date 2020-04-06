@@ -1,0 +1,11 @@
+    dimension 3
+    boundary        p p p
+    units           lj
+    atom_style      full
+
+    bond_style      harmonic
+    pair_style  lj/cut 2.5
+    pair_modify shift yes
+
+    neigh_modify    every 1 delay 1
+    neighbor        0.3 bin

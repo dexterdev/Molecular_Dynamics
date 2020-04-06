@@ -1,0 +1,28 @@
+# -- Init section --
+
+include system.in.init
+
+# -- Atom definition section --
+
+read_data 2p_mol.data
+
+# -- Settings Section --
+
+include system.in.settings
+
+# -- Run section --
+
+dump            1 all custom 500 2p_mol_min.lammpstrj id mol type x y z ix iy iz
+thermo_style    custom step pe etotal vol epair ebond eangle
+thermo          20  # time interval for printing out "thermo" data
+
+min_style quickmin
+min_modify dmax 0.3
+
+
+neigh_modify every 1 delay 0 check yes
+
+minimize 1.0e-7 1.0e-9 10000 300000
+
+
+write_data  2p_mol_after_min.data
