@@ -21,12 +21,12 @@ CDlipid {
     neighbor        0.3 bin
   }
   write_once("In Settings") {
-    pair_coeff  @atom:H @atom:H farago2003_tabulated_potential_Mar18_withzerocorrection.dat HEAD_HEAD
-    pair_coeff  @atom:T1 @atom:T1 farago2003_tabulated_potential_Mar18_withzerocorrection.dat TAIL1_TAIL1
-    pair_coeff  @atom:T2 @atom:T2 farago2003_tabulated_potential_Mar18_withzerocorrection.dat TAIL2_TAIL2
-    pair_coeff  @atom:T1 @atom:T2 farago2003_tabulated_potential_Mar18_withzerocorrection.dat TAIL1_TAIL2
-    pair_coeff  @atom:H @atom:T1 farago2003_tabulated_potential_Mar18_withzerocorrection.dat HEAD_TAIL1
-    pair_coeff  @atom:H @atom:T2 farago2003_tabulated_potential_Mar18_withzerocorrection.dat HEAD_TAIL2
+    pair_coeff  @atom:H @atom:H farago2003_tabulated_potential_Apr21.dat HEAD_HEAD
+    pair_coeff  @atom:T1 @atom:T1 farago2003_tabulated_potential_Apr21.dat TAIL1_TAIL1
+    pair_coeff  @atom:T2 @atom:T2 farago2003_tabulated_potential_Apr21.dat TAIL2_TAIL2
+    pair_coeff  @atom:T1 @atom:T2 farago2003_tabulated_potential_Apr21.dat TAIL1_TAIL2
+    pair_coeff  @atom:H @atom:T1 farago2003_tabulated_potential_Apr21.dat HEAD_TAIL1
+    pair_coeff  @atom:H @atom:T2 farago2003_tabulated_potential_Apr21.dat HEAD_TAIL2
     bond_coeff  @bond:B1   3000.0 1.0
     bond_coeff  @bond:B2   3000.0 1.0 
     angle_coeff @angle:An  3000.0 180.0
