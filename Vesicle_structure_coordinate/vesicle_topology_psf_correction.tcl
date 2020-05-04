@@ -1,26 +1,43 @@
-mol addfile /home/devanandt/Documents/LAMMPS/PROJECTS/membrane_examples/farago2003/after_April21email_correction/smaller_vesicles/vesicle_resid_renumbered_rad10_apl1.8.pdb
+mol addfile vesicle_15rad_apl_outer1.9_inner1.8.pdb
 package require topotools
 package require pbctools
 
-set sel1 [atomselect 0 "sqrt(x^2+y^2+z^2)>9.9"]
+set rad 15
+set ra [expr $rad - 0.1]
+set rb [expr $ra - 1.0]
+set rbu [expr $rb + 0.2]
+set lrad [expr $rad - 5.0]
+set lrada [expr $lrad - 0.1]
+set lradau [expr $lrad + 0.1]
+set mu [expr $rad - 1.9]
+set ml [expr $lrad + 1.9]
+set lrb [expr $rb - 3.0]
+set lrbu [expr $rbu - 3.0]
+
+set boxx 35
+set boxy 35
+set boxz 35
+
+set sel1 [atomselect 0 "sqrt(x^2+y^2+z^2)>$ra"]
 $sel1 set type H
 
-set sel2 [atomselect 0 "(sqrt(x^2+y^2+z^2)>5.7) and (sqrt(x^2+y^2+z^2)<5.9)"]
+set sel2 [atomselect 0 "(sqrt(x^2+y^2+z^2)>$lrada) and (sqrt(x^2+y^2+z^2)<$lradau)"]
 $sel2 set type H
 
-set sel3 [atomselect 0 "(sqrt(x^2+y^2+z^2)>8.9) and (sqrt(x^2+y^2+z^2)<9.1)"]
+set sel3 [atomselect 0 "(sqrt(x^2+y^2+z^2)>$rb) and (sqrt(x^2+y^2+z^2)<$rbu)"]
 $sel3 set type T1
 
-set sel4 [atomselect 0 "(sqrt(x^2+y^2+z^2)>6.7) and (sqrt(x^2+y^2+z^2)<6.9)"]
+set sel4 [atomselect 0 "(sqrt(x^2+y^2+z^2)>$lrb) and (sqrt(x^2+y^2+z^2)<$lrbu)"]
 $sel4 set type T1
 
-set sel5 [atomselect 0 "(sqrt(x^2+y^2+z^2)>7.7) and (sqrt(x^2+y^2+z^2)<8.1)"]
+set sel5 [atomselect 0 "(sqrt(x^2+y^2+z^2)>$ml) and (sqrt(x^2+y^2+z^2)<$mu)"]
 $sel5 set type T2
 
-set sel6 [atomselect 0 "(sqrt(x^2+y^2+z^2)>7.9)"]
+set c [expr $rad - ($rad-$lrad)/2.0]
+set sel6 [atomselect 0 "(sqrt(x^2+y^2+z^2)>$c)"]
 $sel6 set segname U 
 
-set sel7 [atomselect 0 "(sqrt(x^2+y^2+z^2)<7.9)"]
+set sel7 [atomselect 0 "(sqrt(x^2+y^2+z^2)<$c)"]
 $sel7 set segname L 
 
 set blist {}
@@ -48,10 +65,10 @@ topo setanglelist $anglelist
 set sel [atomselect 0 all]
 $sel set mass 1
 
-pbc set {25 25 25} -all -molid top
+pbc set {boxx boxy boxz} -all -molid top
 pbc box -center origin
 
-topo writelammpsdata vesicle_10radius_apl1.8_topology_corrected.data
-$sel writepsf vesicle_10radius_apl_1.8_topology_corrected.psf
-
+topo writelammpsdata vesicle_15radius_topology_corrected.data
+$sel writepsf vesicle_15radius_topology_corrected.psf
+$sel writepdb vesicle_15radius_topology_corrected.pdb
 
